@@ -3,7 +3,7 @@ import "./GigCard.scss"
 
 const GigCard = ({item}) => {
   return (
-    <Link to="./gig/123" className="Link" style={{ textDecoration: 'none' }}>
+    <Link to="./123" className="Link" style={{ textDecoration: 'none' }}>
     <div className="gigCard">
         <img src={item.img} alt="" />
         <div className="info">
