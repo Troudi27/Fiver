@@ -1,8 +1,8 @@
 import express from "express";
-import {deleteUser} from "./../controllers/user.controller.js";
+ import {xxx} from "./../controllers/user.controller.js";
 
 const router = express.Router();
 
-router.get("/test", deleteUser)
+router.get("/xxx",xxx)
 
 export default router;

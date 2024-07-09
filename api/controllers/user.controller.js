@@ -1,3 +1,6 @@
-export const fn = (req,res) =>{
-   //TODO
-}
+
+ 
+ export const xxx = (req, res) => {
+   res.send("xxxx")
+ };
+ 

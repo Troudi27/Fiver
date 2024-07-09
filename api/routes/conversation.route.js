@@ -1,8 +1,8 @@
 import express from "express";
-import {deleteUser} from "../controllers/conversation.controller";
+// import {} from "../controllers/conversation.controller.js";
 
 const router = express.Router();
 
-router.get("/test", deleteUser)
+router.get("/test");
 
 export default router;
