@@ -9,16 +9,19 @@ import Orders from "./pages/orders/Orders";
 import Messages from "./pages/messages/Messages";
 import Message from "./pages/message/Message";
 import MyGigs from "./pages/myGigs/MyGigs";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Outlet, RouterProvider ,useLocation} from "react-router-dom";
 import Footer from "./components/footer/Footer";
 import "./App.scss"
 
 function App() {
 
   const Layout = () => {
+
+    const location = useLocation();
+    const noNavRoutes = ["/login", "/register"];
     return (
       <div className="app">
-        <Navbar />
+        {!noNavRoutes.includes(location.pathname) && <Navbar />}
         <Outlet />
         <Footer />
       </div>
@@ -41,6 +44,14 @@ function App() {
         {
           path:"/gigs/:id",
           element:<Gig/>,
+        },
+        {
+          path: "/register",
+          element: <Register />,
+        },
+        {
+          path: "/login",
+          element: <Login />,
         },
         {
           path:"/orders",
