@@ -50,7 +50,10 @@ const handleLogout = async()=>{
                 <span>English</span>
                 <span>Sign in</span>
                 {! curentUser ?.isSeller && <span>Become a seller</span>}
-                {! curentUser && <button>Join</button>}
+                {! curentUser && 
+                <Link className="link" to="/register">
+                  <button>Join</button>
+                </Link>}
                 {curentUser && (
                     <div className="user" onClick={()=>setOpen(!open)}>
                         <img src={curentUser.img || "/img/noavatar.jpg"} alt="" />
