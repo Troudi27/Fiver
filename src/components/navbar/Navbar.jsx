@@ -1,7 +1,8 @@
 import { useState } from "react"
 import "./Navbar.scss"
 import { useEffect } from "react"
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
+import newRequest from "../../utils/newRequest"
 
 
 export default function Navbar() {
@@ -21,10 +22,18 @@ return ()=>{
 }
 },[])
 
-const curentUser ={
-    id:1,
-    username:"Houssem",
-    isSeller:true,
+const curentUser = JSON.parse(localStorage.getItem("curentUser"))
+
+const navigate = useNavigate()
+
+const handleLogout = async()=>{
+  try {
+    await newRequest.post("/auth/logout")
+    localStorage.setItem("curentUser",null)
+    navigate("/")
+  } catch (error) {
+    console.log(err)
+  }
 }
   return (
     <div className={active || pathname !=="/" ? "navbar active" : "navbar"}>
@@ -44,7 +53,7 @@ const curentUser ={
                 {! curentUser && <button>Join</button>}
                 {curentUser && (
                     <div className="user" onClick={()=>setOpen(!open)}>
-                        <img src="https://3dmodels.org/wp-content/uploads/2018/06/25/ivysaur_pokemon_600_lq_0001.jpg" alt="" />
+                        <img src={curentUser.img || "/img/noavatar.jpg"} alt="" />
                         <span>{curentUser?.username}</span>
                         {open &&<div className="options">
                             {
@@ -57,7 +66,7 @@ const curentUser ={
                             }
                             <Link className="link" to="/orders" >Orders</Link>
                             <Link className="link" to="/messages" >Messages</Link>
-                            <Link className="link" to="/" >Logout</Link>
+                            <Link className="link" onClick={handleLogout} >Logout</Link>
                         </div>}
                     </div>
                 )}

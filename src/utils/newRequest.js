@@ -5,4 +5,4 @@ const newRequest = axios.create({
   withCredentials: true,
 });
 
-export default newRequest;
+export default newRequest; 
