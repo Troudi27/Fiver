@@ -1,6 +1,33 @@
+import { useState } from "react"
 import "./Register.scss"
 
 export default function Register() {
+
+const [file,setFile]=useState(null)
+const [user,setUser]=useState({
+    username:"",
+    email:"",
+    password:"",    
+    img:"",
+    Country:"", 
+    phone:"",
+    desc:"",
+    isSeller:false
+})
+
+console.log(user)
+
+const handleChange =(e)=>{
+  setUser((prev) => {
+    return{...prev, [e.target.name]: e.target.value}
+  })
+}
+
+const handleIsSeller =(e)=>{
+  setUser((prev )=> {
+    return{...prev, isSeller: e.target.checked}
+  })
+}
   return (
     <div className="register">
       <form >
@@ -11,22 +38,25 @@ export default function Register() {
             name="username"
             type="text"
             placeholder="Houssem"
+            onChange={handleChange}
           />
           <label htmlFor="">Email</label>
           <input
             name="email"
             type="email"
             placeholder="email"
+            onChange={handleChange}
           />
           <label htmlFor="">Password</label>
-          <input name="password" type="password"  />
+          <input name="password" type="password"  onChange={handleChange}/>
           <label htmlFor="">Profile Picture</label>
-          <input type="file"  />
+          <input type="file"  onChange={e=>setFile(e.target.files[0])}/>
           <label htmlFor="">Country</label>
           <input
             name="country"
             type="text"
             placeholder="Tunisia"
+            onChange={handleChange}
           />
           <button type="submit">Register</button>
         </div>
@@ -35,7 +65,7 @@ export default function Register() {
           <div className="toggle">
             <label htmlFor="">Activate the seller account</label>
             <label className="switch">
-              <input type="checkbox" />
+              <input type="checkbox"  onChange={handleIsSeller}/>
               <span className="slider round"></span>
             </label>
           </div>
@@ -44,6 +74,7 @@ export default function Register() {
             name="phone"
             type="text"
             placeholder="+216 23 349 082"
+            onChange={handleChange}
             
           />
           <label htmlFor="">Description</label>
@@ -53,6 +84,7 @@ export default function Register() {
             id=""
             cols="30"
             rows="10"
+            onChange={handleChange}
           ></textarea>
         </div>
       </form>

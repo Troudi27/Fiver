@@ -52,7 +52,7 @@ const handleLogout = async()=>{
                 {! curentUser ?.isSeller && <span>Become a seller</span>}
                 {! curentUser && 
                 <Link className="link" to="/register">
-                  <button>Join</button>
+                  <button className="xx">Join</button>
                 </Link>}
                 {curentUser && (
                     <div className="user" onClick={()=>setOpen(!open)}>

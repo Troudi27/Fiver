@@ -18,7 +18,7 @@ function App() {
   const Layout = () => {
 
     const location = useLocation();
-    const noNavRoutes = ["/login", "/register"];
+    const noNavRoutes = ["/login"];
     return (
       <div className="app">
         {!noNavRoutes.includes(location.pathname) && <Navbar />}
