@@ -1,5 +1,8 @@
 import { useState } from "react"
 import "./Register.scss"
+import upload from "../../utils/uploade"
+import newRequest from "../../utils/newRequest"
+import { useNavigate } from "react-router-dom"
 
 export default function Register() {
 
@@ -15,7 +18,7 @@ const [user,setUser]=useState({
     isSeller:false
 })
 
-console.log(user)
+const navigate =useNavigate()
 
 const handleChange =(e)=>{
   setUser((prev) => {
@@ -28,9 +31,29 @@ const handleIsSeller =(e)=>{
     return{...prev, isSeller: e.target.checked}
   })
 }
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  
+  console.log("Submitting form with data:", user);
+
+  const url = await upload(file);
+  console.log("Image uploaded to:", url);
+  try {
+    const response = await newRequest.post("auth/register", {
+      ...user,
+      img: url,
+    });
+    console.log("Registration successful:", response.data);
+    navigate("/")
+  } catch (err) {
+    console.error("Registration failed:", err.response ? err.response.data : err);
+  }
+};
+
   return (
     <div className="register">
-      <form >
+      <form onSubmit={handleSubmit} >
         <div className="left">
           <h1>Create a new account</h1>
           <label htmlFor="">Username</label>
@@ -53,12 +76,12 @@ const handleIsSeller =(e)=>{
           <input type="file"  onChange={e=>setFile(e.target.files[0])}/>
           <label htmlFor="">Country</label>
           <input
-            name="country"
-            type="text"
-            placeholder="Tunisia"
-            onChange={handleChange}
-          />
-          <button type="submit">Register</button>
+              name="Country" 
+              type="text"
+              placeholder="Tunisia"
+              onChange={handleChange}
+            />
+            <button type="submit">Register</button>
         </div>
         <div className="right">
           <h1>I want to become a seller</h1>
