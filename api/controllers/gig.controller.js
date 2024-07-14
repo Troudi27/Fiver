@@ -16,7 +16,7 @@ export const createGig = async(req,res, next) =>{
         const savedGig = await newGig.save()
         res.status(201).json(savedGig)
     } catch (error) {
-        next(err)
+        next(error)
     }
 }
 
@@ -33,8 +33,17 @@ export const deleteGig = async(req,res, next) =>{
     next(error)
    }
 }
+
+
+
 export const getGig = async(req,res, next) =>{
-   //TODO
+   try {
+    const gig = await Gig.findById(req.params.id)
+    if(!gig)next(createError(404,"Gig not found"))
+    res.status(200).send(gig)
+   } catch (error) {
+    next(error)
+   }
 }
 export const getGigs = async(req,res, next) =>{
    //TODO
