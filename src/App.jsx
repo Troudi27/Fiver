@@ -12,19 +12,24 @@ import MyGigs from "./pages/myGigs/MyGigs";
 import { createBrowserRouter, Outlet, RouterProvider ,useLocation} from "react-router-dom";
 import Footer from "./components/footer/Footer";
 import "./App.scss"
+import { QueryClient, QueryClientProvider, useQuery,} from '@tanstack/react-query'
 
 function App() {
 
+  const queryClient = new QueryClient()
   const Layout = () => {
 
     const location = useLocation();
     const noNavRoutes = ["/login"];
     return (
-      <div className="app">
-        {!noNavRoutes.includes(location.pathname) && <Navbar />}
-        <Outlet />
-        <Footer />
-      </div>
+      <QueryClientProvider client={queryClient}>
+        <div className="app">
+          {!noNavRoutes.includes(location.pathname) && <Navbar />}
+          <Outlet />
+          <Footer />
+        </div>
+      </QueryClientProvider>
+      
     );
   };
 

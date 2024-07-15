@@ -48,7 +48,7 @@ const handleLogout = async()=>{
                 <span>Fiverr Business</span>
                 <span>Explore</span>
                 <span>English</span>
-                <span>Sign in</span>
+                <Link to="/login" className="link">Sign in</Link>
                 {! curentUser ?.isSeller && <span>Become a seller</span>}
                 {! curentUser && 
                 <Link className="link" to="/register">
